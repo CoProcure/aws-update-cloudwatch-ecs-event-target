@@ -38,7 +38,7 @@ function parseTargets(targetsStr) {
 
 async function run() {
   const taskDefinitionFamily = core.getInput('task-definition-family', { required: true });
-  const rules = parseTargets(core.getInput('rules', { required: true }));
+  const rules = parseTargets(core.getInput('rule-names', { required: true }));
   const taskDefinitionArn = await fetchTaskDefinitionArn(taskDefinitionFamily);
 
   core.debug(`Updating targets with ${taskDefinitionArn}.`)
