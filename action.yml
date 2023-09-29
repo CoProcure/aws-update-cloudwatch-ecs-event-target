@@ -16,5 +16,5 @@ outputs:
     description: 'The ARN of the task definition used on event targets.'
 
 runs:
-  using: 'node18'
+  using: 'node20'
   main: 'dist/index.js'
