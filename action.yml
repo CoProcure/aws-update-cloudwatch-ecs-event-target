@@ -1,0 +1,20 @@
+name: 'Update Cloudwatch ECS Event Target with Task Definition'
+description: 'Updates Cloudwatch ECS Event Targets with provided task definitions.'
+branding:
+  icon: 'activity'
+  color: 'white'
+inputs:
+  task-definition-family:
+    description: 'A task definition family to use. Will use the latest task definition in the family.'
+    required: false
+  rule-names:
+    description: 'The target rule or rules whose task definitions should be updated. Multiple should be separated by newlines.'
+    required: true
+
+outputs:
+  task-definition-arn:
+    description: 'The ARN of the task definition used on event targets.'
+
+runs:
+  using: 'node18'
+  main: 'dist/index.js'
