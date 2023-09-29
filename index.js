@@ -37,8 +37,8 @@ function parseTargets(targetsStr) {
 }
 
 async function run() {
-  const taskDefinitionFamily = 'worker-staging' || core.getInput('task-definition-family', { required: true });
-  const rules = parseTargets('algoliacheck-staging\nscanfiles-staging' || core.getInput('rules', { required: true }));
+  const taskDefinitionFamily = core.getInput('task-definition-family', { required: true });
+  const rules = parseTargets(core.getInput('rules', { required: true }));
   const taskDefinitionArn = await fetchTaskDefinitionArn(taskDefinitionFamily);
 
   core.debug(`Updating targets with ${taskDefinitionArn}.`)
@@ -60,7 +60,7 @@ async function run() {
 
     try {
       const putTargetsCommand = new PutTargetsCommand({
-        Rule: 'algoliacheck-staging',
+        Rule: rule,
         Targets: targets
       });
 
