@@ -1,25 +1,21 @@
-# AWS Update Cloudwatch Event Target with Task Definition
+# Wait for ECS Deployment to Complete
 
-Updates Task Definitions to the latest active version for all Cloudwatch Event Targets from a list of rule names.
-
-This is useful for keeping scheduled tasks up-to-date with the latest deployed builds rather than managing separate
-task definitions for each scheduled task.
+Waits for any pending ECS deployment to reach the completed state before continuing. This action
+is useful to avoid cases where a new deploy begins during a partially completed rollback. AWS notes
+in their [documentation](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-circuit-breaker.html)
+that when using deployment circuit breakers, if a second deployment begins while the first is being
+rolled back, the second deployment _cannot_ rollback.
 
 Usage
 ``` yaml
-- name: Update task definitions
-  uses: coprocure.us/aws-update-cloudwatch-ecs-event-target@v1.0
+- name: Wait for deployment
+  uses: coprocure/wait-for-ecs-deployment@v1.0
   with:
-    task-defintion-family: task-definition-name
-    rules: |-
-      rule-1
-      rule-2
-      rule-3
+    cluster: main
+    service: my-service
 ```
 
-See [aciton.yml](action.yml) file for the full documentation for this action's inputs and outputs.
-
-Note that this action retrieves and sets the latest task definition for a given task definition family. For each rule, all event targets will be updated.
+See [action.yml](action.yml) file for the full documentation for this action's inputs and outputs.
 
 ## Credentials and Region
 
