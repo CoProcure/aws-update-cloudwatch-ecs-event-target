@@ -1,19 +1,25 @@
 {
-  "name": "@CoProcure/aws-update-cloudwatch-ecs-event-target",
+  "name": "@CoProcure/wait-for-ecs-deployment",
   "version": "0.0.1",
   "main": "index.js",
-  "repository": "https://github.com/CoProcure/aws-update-cloudwatch-ecs-event-target",
+  "repository": "https://github.com/CoProcure/wait-for-ecs-deployment",
   "author": "ghmeier <meier.garret@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "package": "ncc build index.js -o dist"
+    "build": "npx ncc build src/index.ts -o dist",
+    "lint": "npm run lint:types && npm run lint:biome",
+    "lint:biome": "biome ci './src/'",
+    "lint:fix": "biome check --fix './src/'",
+    "lint:types": "tsc --noemit"
   },
   "dependencies": {
-    "@actions/core": "^1.9.0",
-    "@aws-sdk/client-cloudwatch-events": "^3.421.0",
-    "@aws-sdk/client-ecs": "^3.287.0"
+    "@actions/core": "^1.11.1",
+    "@aws-sdk/client-ecs": "^3.691.0"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.34.0"
+    "@biomejs/biome": "^1.9.4",
+    "@types/node": "^22.9.0",
+    "@vercel/ncc": "^0.34.0",
+    "typescript": "^5.6.3"
   }
 }

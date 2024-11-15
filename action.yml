@@ -1,20 +1,19 @@
-name: 'Update Cloudwatch ECS Event Target with Task Definition'
-description: 'Updates Cloudwatch ECS Event Targets with provided task definitions.'
+name: 'Wait for ECS service deployment to complete.'
+description: 'Waits for an ECS service to reach the completed state before continuing.'
 branding:
   icon: 'activity'
   color: 'white'
 inputs:
-  task-definition-family:
-    description: 'A task definition family to use. Will use the latest task definition in the family.'
-    required: false
-  rule-names:
-    description: 'The target rule or rules whose task definitions should be updated. Multiple should be separated by newlines.'
+  cluster:
+    description: 'The ECS cluster the service is in.'
     required: true
-
-outputs:
-  task-definition-arn:
-    description: 'The ARN of the task definition used on event targets.'
+  service:
+    description: 'The ECS service in the cluster to wait for completed deployment.'
+    required: true
+  wait-for-minutes:
+    description: "Minutes to wait before timing out and failing the action."
+    default: 10
 
 runs:
-  using: 'node20'
+  using: 'node22'
   main: 'dist/index.js'
