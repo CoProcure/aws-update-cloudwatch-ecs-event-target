@@ -9,7 +9,7 @@
     "package": "ncc build index.js -o dist"
   },
   "dependencies": {
-    "@actions/core": "^1.9.0",
+    "@actions/core": "^1.11.1",
     "@aws-sdk/client-cloudwatch-events": "^3.421.0",
     "@aws-sdk/client-ecs": "^3.287.0"
   },
